@@ -11,7 +11,6 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@ui/dialog'
-
 import {
   Form,
   FormControl,
@@ -20,10 +19,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@ui/form'
-
 import { Input } from '@ui/input'
 import { Button } from '@ui/button'
 import { ModeToggle } from '@/components/ModeToggle'
+import FileUpload from '@/components/FileUpload'
 
 const formSchema = z.object({
   name: z
@@ -69,7 +68,21 @@ function InitialModal() {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 p-6 ">
               <div className="flex items-center justify-center text-center">
-                TODO: Upload Image
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
               </div>
               <FormField
                 control={form.control}
